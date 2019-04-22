@@ -1,6 +1,6 @@
 # Harvest Collection API
 
-The harvest collection API uses a PostgreSQL database to serve and ingest data about harvests and bays. Visit the deployed API [here]('https://enigmatic-woodland-72423.herokuapp.com/harvests').
+The harvest collection API uses a PostgreSQL database to serve and ingest data about harvests and bays. Visit the deployed API [here](https://enigmatic-woodland-72423.herokuapp.com/harvests).
 
 ##### Table of Contents
 
