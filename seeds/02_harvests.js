@@ -1,10 +1,12 @@
+const utility = require('../src/utility')
+
 exports.seed = function(knex, Promise) {
   return knex('harvests')
     .del()
     .then(function() {
       return knex('harvests').insert([
         {
-          harvestId: getId(),
+          harvestId: utility.getId(),
           plantCount: 528,
           harvestGrams: 202,
           totalPlantGrams: 3410,
@@ -21,7 +23,7 @@ exports.seed = function(knex, Promise) {
           sqFtPerPlant: 1.6193181818
         },
         {
-          harvestId: getId(),
+          harvestId: utility.getId(),
           plantCount: 492,
           harvestGrams: 195,
           totalPlantGrams: 2901,
@@ -38,7 +40,7 @@ exports.seed = function(knex, Promise) {
           sqFtPerPlant: 1.8597560976
         },
         {
-          harvestId: getId(),
+          harvestId: utility.getId(),
           plantCount: 601,
           harvestGrams: 210,
           totalPlantGrams: 3611,
@@ -55,7 +57,7 @@ exports.seed = function(knex, Promise) {
           sqFtPerPlant: 1.231281198
         },
         {
-          harvestId: getId(),
+          harvestId: utility.getId(),
           plantCount: 398,
           harvestGrams: 219,
           totalPlantGrams: 3209,
@@ -72,7 +74,7 @@ exports.seed = function(knex, Promise) {
           sqFtPerPlant: 2.0904522613
         },
         {
-          harvestId: getId(),
+          harvestId: utility.getId(),
           plantCount: 120,
           harvestGrams: 98,
           totalPlantGrams: 1099,
@@ -90,10 +92,4 @@ exports.seed = function(knex, Promise) {
         }
       ])
     })
-}
-
-function getId() {
-  return Math.random()
-    .toString(36)
-    .replace('0.', '')
 }

@@ -1,5 +1,6 @@
 const config = require('../knexfile')[process.env.NODE_ENV || 'development']
 const database = require('knex')(config)
+const utility = require('./utility')
 
 function getHarvests(queryParams) {
   const sortColumn = queryParams.sort_by ? queryParams.sort_by : 'date'
@@ -17,13 +18,21 @@ function getHarvests(queryParams) {
   return query
 }
 
-function createHarvest(body) {
+function createHarvest(harvest, bay) {
   return database('harvests')
-    .insert(body)
+    .insert(utility.prepareHarvest(harvest, bay))
     .returning('*')
+}
+
+function getBay(bay) {
+  return database('bays')
+    .where('id', bay.replace(/\W/g, ''))
+    .returning('*')
+    .then(record => record[0])
 }
 
 module.exports = {
   createHarvest,
+  getBay,
   getHarvests
 }
