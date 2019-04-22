@@ -1,8 +1,5 @@
 function formatHarvests(harvests, queryParams) {
-  const harvestList = harvests.map(harvest => {
-    const harvestLbs = convertToPounds(harvest.harvestGrams)
-    const totalPlantLbs = convertToPounds(harvest.totalPlantGrams)
-
+  return harvests.map(harvest => {
     return {
       id: harvest.harvestId,
       plantCount: harvest.plantCount,
@@ -12,33 +9,15 @@ function formatHarvests(harvests, queryParams) {
       bay: harvest.bay,
       strain: harvest.strain,
       date: harvest.date,
-      harvestLbs,
-      totalPlantLbs,
-      percentHarvestedPlantWeight: Number(
-        ((harvestLbs / totalPlantLbs) * 100).toFixed(10)
-      ),
-      lbsHarvestedPerSqFt: Number(
-        (harvestLbs / harvest.squareFootage).toFixed(10)
-      ),
-      plantsPerLight: Number(
-        (harvest.plantCount / harvest.lightCount).toFixed(10)
-      ),
-      harvestLbsPerLight: Number((harvestLbs / harvest.lightCount).toFixed(10)),
-      sqFtPerPlant: Number(
-        (harvest.squareFootage / harvest.plantCount).toFixed(10)
-      )
+      harvestLbs: Number(harvest.harvestLbs),
+      totalPlantLbs: Number(harvest.totalPlantLbs),
+      percentHarvestedPlantWeight: Number(harvest.percentHarvestedPlantWeight),
+      lbsHarvestedPerSqFt: Number(harvest.lbsHarvestedPerSqFt),
+      plantsPerLight: Number(harvest.plantsPerLight),
+      harvestLbsPerLight: Number(harvest.harvestLbsPerLight),
+      sqFtPerPlant: Number(harvest.sqFtPerPlant)
     }
   })
-
-  // Sort by
-  // order: request.query.order,
-  const sortBy = queryParams.sortBy ? queryParams.sortBy : 'date'
-  const order = queryParams.order ? queryParams.order : 'desc'
-
-  // queryParams.order
-  //   ? query.orderBy(sortColumn, queryParams.order)
-  //   : query.orderBy(sortColumn, 'desc')
-  return harvestList
 }
 
 function convertToPounds(grams) {
