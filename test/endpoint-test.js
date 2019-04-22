@@ -6,8 +6,6 @@ const assert = chai.assert
 chai.use(chaiHttp)
 
 describe('endpoints', () => {
-  const prod = process.env.NODE_ENV
-
   const harvest = {
     plantCount: 303,
     harvestGrams: 100,
@@ -18,61 +16,53 @@ describe('endpoints', () => {
   }
 
   it('can add a new harvest', done => {
-    if (!prod) {
-      chai
-        .request(app)
-        .post('/harvests')
-        .send(harvest)
-        .end((error, response) => {
-          assert.equal(
-            response.status,
-            201,
-            'Response should have a 201 CREATED status'
-          )
-          assert.equal(
-            response.body.plantCount,
-            303,
-            'Correct plantCount should be returend'
-          )
-          assert.equal(
-            response.body.totalPlantLbs,
-            5.359375,
-            'Newly created totalPlantLbs field should be returned'
-          )
-          done()
-        })
-    } else {
-      console.error('Can only run tests in dev mode')
-    }
+    chai
+      .request(app)
+      .post('/harvests')
+      .send(harvest)
+      .end((error, response) => {
+        assert.equal(
+          response.status,
+          201,
+          'Response should have a 201 CREATED status'
+        )
+        assert.equal(
+          response.body.plantCount,
+          303,
+          'Correct plantCount should be returend'
+        )
+        assert.equal(
+          response.body.totalPlantLbs,
+          5.359375,
+          'Newly created totalPlantLbs field should be returned'
+        )
+        done()
+      })
   })
 
   it('can fetch harvests', done => {
-    if (!prod) {
-      chai
-        .request(app)
-        .get(
-          '/harvests?bay=se959&sort=percentHarvestedPlantWeight&order=asc&strain=gsc'
+    chai
+      .request(app)
+      .get(
+        '/harvests?bay=se959&sort=percentHarvestedPlantWeight&order=asc&strain=gsc'
+      )
+      .end((error, response) => {
+        assert.equal(
+          response.status,
+          200,
+          'Response should have a 200 OK status'
         )
-        .end((error, response) => {
-          assert.equal(
-            response.status,
-            200,
-            'Response should have a 200 OK status'
-          )
-          assert.equal(
-            response.body.harvests.length,
-            2,
-            'Only two results should be returned'
-          )
-          assert.equal(
-            response.body.harvests[0].percentHarvestedPlantWeight,
-            6.8245559362,
-            'Should return the lowest percent harvested first'
-          )
-          done()
-        })
-    } else {
-      console.error('Can only run tests in dev mode')
-    }
+        assert.equal(
+          response.body.harvests.length,
+          2,
+          'Only two results should be returned'
+        )
+        assert.equal(
+          response.body.harvests[0].percentHarvestedPlantWeight,
+          6.8245559362,
+          'Should return the lowest percent harvested first'
+        )
+        done()
+      })
   })
 })
