@@ -1,6 +1,6 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('harvests', table => {
-    table.text('id').primary()
+    table.text('harvestId').primary()
     table.integer('plantCount').notNullable()
     table.integer('harvestGrams').notNullable()
     table.integer('totalPlantGrams').notNullable()

@@ -4,7 +4,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       return knex('harvests').insert([
         {
-          id: getId(),
+          harvestId: getId(),
           plantCount: 528,
           harvestGrams: 202,
           totalPlantGrams: 3410,
@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
           date: getDate()
         },
         {
-          id: getId(),
+          harvestId: getId(),
           plantCount: 492,
           harvestGrams: 195,
           totalPlantGrams: 2901,

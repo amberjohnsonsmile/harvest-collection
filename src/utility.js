@@ -1,7 +1,10 @@
 function formatHarvests(harvests) {
   return harvests.map(harvest => {
+    const harvestLbs = convertToPounds(harvest.harvestGrams)
+    const totalPlantLbs = convertToPounds(harvest.totalPlantGrams)
+
     return {
-      id: harvest.id,
+      id: harvest.harvestId,
       plantCount: harvest.plantCount,
       harvestGrams: harvest.harvestGrams,
       totalPlantGrams: harvest.totalPlantGrams,
@@ -9,15 +12,27 @@ function formatHarvests(harvests) {
       bay: harvest.bay,
       strain: harvest.strain,
       date: harvest.date,
-      harvestLbs: 0.4508928571,
-      totalPlantLbs: 7.6116071429,
-      percentHarvestedPlantWeight: 5.923753666,
-      lbsHarvestedPerSqFt: 0.008318696331,
-      plantsPerLight: 9.4285714286,
-      harvestLbsPerLight: 0.008051658162,
-      sqFtPerPlant: 0.5770491803
+      harvestLbs,
+      totalPlantLbs,
+      percentHarvestedPlantWeight: Number(
+        ((harvestLbs / totalPlantLbs) * 100).toFixed(10)
+      ),
+      lbsHarvestedPerSqFt: Number(
+        (harvestLbs / harvest.squareFootage).toFixed(10)
+      ),
+      plantsPerLight: Number(
+        (harvest.plantCount / harvest.lightCount).toFixed(10)
+      ),
+      harvestLbsPerLight: Number((harvestLbs / harvest.lightCount).toFixed(10)),
+      sqFtPerPlant: Number(
+        (harvest.squareFootage / harvest.plantCount).toFixed(10)
+      )
     }
   })
+}
+
+function convertToPounds(grams) {
+  return Number((grams / 448).toFixed(10))
 }
 
 module.exports = formatHarvests
