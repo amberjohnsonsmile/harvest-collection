@@ -1,5 +1,5 @@
-function formatHarvests(harvests) {
-  return harvests.map(harvest => {
+function formatHarvests(harvests, queryParams) {
+  const harvestList = harvests.map(harvest => {
     const harvestLbs = convertToPounds(harvest.harvestGrams)
     const totalPlantLbs = convertToPounds(harvest.totalPlantGrams)
 
@@ -29,6 +29,16 @@ function formatHarvests(harvests) {
       )
     }
   })
+
+  // Sort by
+  // order: request.query.order,
+  const sortBy = queryParams.sortBy ? queryParams.sortBy : 'date'
+  const order = queryParams.order ? queryParams.order : 'desc'
+
+  // queryParams.order
+  //   ? query.orderBy(sortColumn, queryParams.order)
+  //   : query.orderBy(sortColumn, 'desc')
+  return harvestList
 }
 
 function convertToPounds(grams) {

@@ -2,9 +2,12 @@
 
 Summary
 
+Visit the deployed API [here]('https://enigmatic-woodland-72423.herokuapp.com/harvests')
+
 ##### Table of Contents
 
 [Technologies](#technologies)  
+[Design Decisions](#design-decisions)
 [Endpoints](#endpoints)  
 [Database](#database)
 [Running the API locally](#running-the-api-locally)  
@@ -19,6 +22,10 @@ PostgreSQL
 Knex.js  
 Heroku  
 Chai HTTP
+
+## Design Decisions
+
+In the trade-off of speed versus space, I chose to prioritize speed. At first I calculated values such as `harvestLbs`, `totalPlantLbs`, and `percentHarvestedPlantWeight` on the fly while pulling data from the API. However, needing to potentially sort using these calculated values made the process slow. I ended up saving all fields in the database, meaning they could be calculated up front and sorted as they are pulled from the database. If I had choses to prioritize space, I would have stuck with calculating the values only as needed.
 
 ## Endpoints
 

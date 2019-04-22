@@ -1,10 +1,11 @@
 const config = require('../knexfile')[process.env.NODE_ENV || 'development']
 const database = require('knex')(config)
 
-function getHarvest() {
+function getHarvest(queryParams) {
   const query = database('harvests')
     .join('bays', 'harvests.bay', 'bays.id')
     .select('*')
+
   return query
 }
 
