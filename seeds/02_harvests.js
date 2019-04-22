@@ -89,6 +89,23 @@ exports.seed = function(knex, Promise) {
           plantsPerLight: 2.2641509434,
           harvestLbsPerLight: 0.0041273585,
           sqFtPerPlant: 6.9333333333
+        },
+        {
+          harvestId: utility.getId(),
+          plantCount: 594,
+          harvestGrams: 283,
+          totalPlantGrams: 3926,
+          classification: 'MED',
+          bay: 'se959',
+          strain: 'GSC',
+          date: '03/31/2019',
+          harvestLbs: 0.6316964286,
+          totalPlantLbs: 8.7633928571,
+          percentHarvestedPlantWeight: 7.2083545597,
+          lbsHarvestedPerSqFt: 0.0007592505,
+          plantsPerLight: 11.2075471698,
+          harvestLbsPerLight: 0.0119188,
+          sqFtPerPlant: 1.4006734006
         }
       ])
     })

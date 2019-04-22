@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
-    "test": "mocha --exit"
+    "test": "knex seed:run && mocha --exit && knex seed:run"
   },
   "author": "Amber Johnson",
   "license": "MIT",

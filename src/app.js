@@ -24,7 +24,7 @@ app.post('/harvests', (request, response, next) => {
       return queries.createHarvest(request.body, bay)
     })
     .then(data => {
-      response.json({ harvest: utility.formatHarvests(data)[0] })
+      response.status(201).json(utility.formatHarvests(data)[0])
     })
     .catch(error => next(error))
 })
