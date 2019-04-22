@@ -22,6 +22,36 @@ exports.seed = function(knex, Promise) {
           bay: 'sw857',
           strain: 'OGK',
           date: getDate()
+        },
+        {
+          harvestId: getId(),
+          plantCount: 601,
+          harvestGrams: 210,
+          totalPlantGrams: 3611,
+          classification: 'REC',
+          bay: 'nw923',
+          strain: 'BD',
+          date: getDate()
+        },
+        {
+          harvestId: getId(),
+          plantCount: 398,
+          harvestGrams: 219,
+          totalPlantGrams: 3209,
+          classification: 'REC',
+          bay: 'se959',
+          strain: 'GSC',
+          date: getDate()
+        },
+        {
+          harvestId: getId(),
+          plantCount: 120,
+          harvestGrams: 98,
+          totalPlantGrams: 1099,
+          classification: 'REC',
+          bay: 'se959',
+          strain: 'SD',
+          date: getDate()
         }
       ])
     })
