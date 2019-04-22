@@ -1,15 +1,12 @@
 # Harvest Collection API
 
-Summary
-
-Visit the deployed API [here]('https://enigmatic-woodland-72423.herokuapp.com/harvests')
+The harvest collection API uses a PostgreSQL database to serve and ingest data about harvests and bays. Visit the deployed API [here]('https://enigmatic-woodland-72423.herokuapp.com/harvests').
 
 ##### Table of Contents
 
 [Technologies](#technologies)  
-[Design Decisions](#design-decisions)
 [Endpoints](#endpoints)  
-[Database](#database)
+[Database](#database)  
 [Running the API locally](#running-the-api-locally)  
 [License](#license)  
 [Contact](#contact)
@@ -23,15 +20,11 @@ Knex.js
 Heroku  
 Chai HTTP
 
-## Design Decisions
-
-In the trade-off of speed versus space, I chose to prioritize speed. At first I calculated values such as `harvestLbs`, `totalPlantLbs`, and `percentHarvestedPlantWeight` on the fly while pulling data from the API. However, needing to potentially sort using these calculated values made the process slow. I ended up saving all fields in the database, meaning they could be calculated up front and sorted as they are pulled from the database. If I had choses to prioritize space, I would have stuck with calculating the values only as needed.
-
 ## Endpoints
 
 #### `POST /harvests`
 
-Summary
+Creates a new entry in the `harvests` table. Calculates additional values by joining with data from the `bays` table.
 
 **Example request** :
 
@@ -72,7 +65,12 @@ Summary
 
 #### `GET /harvests`
 
-Summary
+Returns a list of harvests. Optional query parameters include:
+
+- strain - limit response to provided strain. Example: PEX.
+- bay - limit response to provided bay ID. Example: nw615.
+- sort_by - one of date, harvestLbs, percentHarvestedPlantWeight, lbsHarvestedPerSqFt or sqFtPerPlant. Default: date.
+- order - ASC or DESC Default: DESC.
 
 **Example request** : `/harvests?strain=PEX&bay=nw615&sort_by=date&order=DESC`
 
@@ -103,6 +101,36 @@ Summary
 ---
 
 ## Database
+
+In the trade-off of speed versus space, I chose to prioritize speed. At first I calculated values such as `harvestLbs`, `totalPlantLbs`, and `percentHarvestedPlantWeight` on the fly while pulling data from the API. However, needing to potentially sort using these calculated values made the process slow. I ended up saving all fields in the database, meaning they could be calculated up front and sorted as they are pulled from the database. If I had choses to prioritize space, I would have stuck with calculating the values only as needed.
+
+#### Bays table
+
+| column        | type    |
+| ------------- | ------- |
+| id            | text    |
+| lightCount    | integer |
+| squareFootage | integer |
+
+#### Harvests table
+
+| column                      | type        |
+| --------------------------- | ----------- |
+| harvestId                   | text        |
+| plantCount                  | integer     |
+| harvestGrams                | integer     |
+| totalPlantGrams             | integer     |
+| classification              | varchar(3)  |
+| bay                         | text        |
+| strain                      | varchar(3)  |
+| date                        | varchar(10) |
+| harvestLbs                  | decimal     |
+| totalPlantLbs               | decimal     |
+| percentHarvestedPlantWeight | decimal     |
+| lbsHarvestedPerSqFt         | decimal     |
+| plantsPerLight              | decimal     |
+| harvestLbsPerLight          | decimal     |
+| sqFtPerPlant                | decimal     |
 
 ## Running the API locally
 
