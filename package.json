@@ -1,0 +1,11 @@
+{
+  "name": "harvest-collection",
+  "version": "1.0.0",
+  "description": "API collection of harvest data",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "author": "Amber Johnson",
+  "license": "MIT"
+}
