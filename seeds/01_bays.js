@@ -1,0 +1,28 @@
+exports.seed = function(knex, Promise) {
+  return knex('bays')
+    .del()
+    .then(function() {
+      return knex('bays').insert([
+        {
+          id: 'nw615',
+          lightCount: 56,
+          squareFootage: 855
+        },
+        {
+          id: 'sw857',
+          lightCount: 65,
+          squareFootage: 915
+        },
+        {
+          id: 'nw923',
+          lightCount: 45,
+          squareFootage: 740
+        },
+        {
+          id: 'se959',
+          lightCount: 53,
+          squareFootage: 832
+        }
+      ])
+    })
+}
